@@ -28,32 +28,37 @@ HashtagItem = (function() {
     HashtagItem.prototype.html = function() {
         return template.render({ obj: this.data });
     };
+
+    /**
+     * Draw the energy bar on an item.
+     * @param {string} element - The item.
+     */
+    HashtagItem.drawRadial = function(element) {
+        var canvas = $(element).find('canvas.hashtag-level-bar');
+        var level = canvas.data('level');
+        var width = 10;
+        var size = 64;
+
+        if (level)
+            setTimeout(draw, 500, canvas, level, width, size);
+    };
+
+    /**
      * Renders the item.
-     * @param {string} element - Optional. Element into which append the item.
+     * @param {string} element - Element into which append the item.
      * @return {object} - The generated item.
      */
     HashtagItem.prototype.render = function(element) {
-        var item = $(template.render({ obj: this.data }));
-        if (element) {
-            item.appendTo(element).drawRadial();
-        }
+        var item = $(this.html()).appendTo(element);
+        HashtagItem.drawRadial(item);
         return item;
     };
 
-    (function($) {
-        $.fn.drawRadial = function() {
-            // TODO early return if not an hashtag
-            var width = 10;
-            var size = 64;
-
-            var canvas = $(this).find('canvas.hashtag-level-bar');
-            var level = canvas.data('level');
-
-            setTimeout(render, 500, canvas, level, width, size);
-        };
-    })(jQuery);
-
-    function render(canvas, originalValue, width, originalSize, value) {
+    /**
+     * Draw the radial energy bar into the canvas.
+     * @private
+     */
+    var draw = function(canvas, originalValue, width, originalSize, value) {
         if (value == undefined) {
             value = 0.1;
         }
@@ -118,9 +123,9 @@ HashtagItem = (function() {
         ctx.translate(-width / 2 - 4, -width / 2 - 4);
 
         if (originalValue > value) {
-            setTimeout(render, 30, canvas, originalValue, width, originalSize, value + 0.06);
+            setTimeout(draw, 30, canvas, originalValue, width, originalSize, value + 0.06);
         }
-    }
+    };
 
     return HashtagItem;
 })();
@@ -182,6 +187,14 @@ HashtagList = (function() {
     $.fn.hashtagItem = function(data) {
         return new HashtagItem(data).render(this);
     }
+
+    /**
+     * Draw the radial energy bar.
+     */
+    $.fn.drawRadial = function() {
+        HashtagItem.drawRadial(this);
+        return this;
+    };
 
     /**
      * Generates a hashtag list.
