@@ -13,10 +13,12 @@ window.be={};be.tags=[{id:1,'name':'hashtag','primary':true,'energy':'1,234','le
 <script>
 $(document).ready(function () {
     $('#container').hashtagList(be.tags);
+    $('#single').hashtagItem(be.tags[0]);
 });
 </script>
 </head>
 <body>
     <div id="container"></div>
+    <div id="single"/>
 </body>
 </html>
