@@ -26,7 +26,7 @@ HashtagItem = (function() {
      * @return {string} - The rendered item.
      */
     HashtagItem.prototype.html = function() {
-        return template.render({ obj: this.data });
+        return template.render({ data: this.data });
     };
 
     /**
