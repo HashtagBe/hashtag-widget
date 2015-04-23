@@ -21,6 +21,13 @@ HashtagItem = (function() {
     var template = new EJS({ url: 'js/item.ejs' });
 
     /**
+     * Renders the item as HTML.
+     * Need to explicitly call HashtagItem.drawRadial().
+     * @return {string} - The rendered item.
+     */
+    HashtagItem.prototype.html = function() {
+        return template.render({ obj: this.data });
+    };
      * Renders the item.
      * @param {string} element - Optional. Element into which append the item.
      * @return {object} - The generated item.
@@ -139,17 +146,25 @@ HashtagList = (function() {
     var template = new EJS({ url: 'js/list.ejs' });
 
     /**
+     * Renders the list as HTML.
+     * Need to explicitly call HashtagItem.drawRadial().
+     * @return {string} - The rendered list.
+     */
+    HashtagList.prototype.html = function() {
+        return template.render({ data: this.data });
+    };
+
+    /**
      * Renders the list.
      * @param {string} element - Element into which append the list.
      * @return {object} - The generated list.
      */
     HashtagList.prototype.render = function(element) {
-        var list = $(template.render({ data: this.data })).appendTo(element);
-        list.find('.hashtag').each(function() {
-            $(this).drawRadial()
+        return $(this.html())
+        .appendTo(element)
+        .find('.hashtag').each(function() {
+            HashtagItem.drawRadial(this)
         });
-
-        return list;
     };
 
     return HashtagList;
