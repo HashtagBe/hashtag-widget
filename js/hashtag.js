@@ -167,7 +167,7 @@ HashtagList = (function() {
     HashtagList.prototype.render = function(element) {
         return $(this.html())
         .appendTo(element)
-        .find('.hashtag').each(function() {
+        .find('.hashtag-item').each(function() {
             HashtagItem.drawRadial(this)
         });
     };
