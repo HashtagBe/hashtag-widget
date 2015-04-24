@@ -63,6 +63,12 @@ canvas.hashtag-level-bar {
     font-weight: bold;
 }
 
+.hashtag-label.truncate > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 68px;
+}
 
 .hashtag-level span {
     display: block;
