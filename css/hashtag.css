@@ -1,20 +1,52 @@
-.hashtag-list li {
-    float:left;
+ul.hashtag-list {
+    list-style-type: none;
+}
+
+ul.hashtag-list li {
+    display: inline;
 }
 
 .hashtag-item {
-    color: #fff;
-    float:left;
+    display: inline-block;
     font-family: 'Open Sans', sans-serif;
     text-decoration: none;
-    width: 100%;
 }
 
 .hashtag-circle {
-    border-radius: 50%;
     height: 68px;
-    margin: 0px auto;
     width: 68px;
+}
+
+canvas.hashtag-level-bar {
+    height: 66px;
+    margin: 2px 0 0 2px;
+    position: absolute;
+    width: 132px;
+}
+
+.hashtag-icon {
+    background-color: #db2f61;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px rgba(50, 50, 50, 0.3);
+    height: 50px;
+    margin: 10px;
+    position: absolute;
+    width: 50px;
+}
+
+.hashtag-level {
+    background: black;
+    border-radius: 50%;
+    color: white;
+    visibility: hidden;
+    opacity: 0.6;
+    position: absolute;
+}
+
+.hashtag-icon:hover .hashtag-level {
+    visibility: visible;
 }
 
 .hashtag-label {
@@ -31,54 +63,12 @@
     font-weight: bold;
 }
 
-.hashtag-level-bar {
-    height: 66px;
-    margin: 2px 0 0 2px;
-    position: absolute;
-    width: 132px;
-}
 
 .hashtag-level span {
     display: block;
     font-size: 40px;
     font-weight: bold;
     line-height: 50px;
-    text-align: center;
-    width: 50px;
-}
-
-.hashtag-icon {
-    background-color: #db2f61;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 50%;
-    box-shadow: 0px 1px 1px rgba(50, 50, 50, 0.3);
-    height: 50px;
-    margin: 10px;
-    position: absolute;
-    width: 50px;
-}
-
-.hashtag-icon .hashtag-level {
-    border-radius: 50%;
-    display: none;
-    height: 72px;
-    left: -7.5px;
-    line-height: 1;
-    margin: -6px 0 0 8px;
-    overflow: hidden;
-    position: absolute;
-    top: 6px;
-    width: 72px;
-}
-
-.hashtag-icon:hover .hashtag-level {
-    background:black;
-    border-radius: 50%;
-    display: inline-block!important;
-    height: 50px;
-    left: -8px;
-    opacity: 0.6 ;
     text-align: center;
     width: 50px;
 }
