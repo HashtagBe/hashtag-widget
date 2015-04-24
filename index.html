@@ -12,13 +12,36 @@ window.be={};be.tags=[{id:1,'name':'hashtag','primary':true,'energy':'1,234','le
 <link rel="stylesheet" type="text/css" href="css/hashtag.css"/>
 <script>
 $(document).ready(function () {
-    $('#container').hashtagList(be.tags);
-    $('#single').hashtagItem(be.tags[0]);
+    function randomTag() {
+        return be.tags[Math.floor(Math.random() * be.tags.length)];
+    }
+    $('#addList').click(function() {
+        $('#list').hashtagList(be.tags);
+    }).click();
+    $('#addItem').click(function() {
+        $('#single').hashtagItem(randomTag()).drawRadial();
+    }).click();
+    $('#addListItem').click(function() {
+        var item = new HashtagItem(randomTag()).html();
+        $('<li>'+item+'</li>').appendTo("#list .hashtag-list").drawRadial();
+    });
 });
 </script>
 </head>
-<body>
-    <div id="container"></div>
-    <div id="single"/>
+<body style="background: lightgray">
+    <h1>Hashtag widget test page</h1>
+    <button id="addList">Add list</button>
+    <button id="addListItem">Add list item</button>
+    <button id="addItem">Add item</button>
+    <table>
+        <tr>
+            <td>HashtagList</td>
+            <td><div id="list"></div></td>
+        </tr>
+        <tr>
+            <td>HashtagItem</td>
+            <td><div id="single"></div></td>
+        </tr>
+    </table>
 </body>
 </html>
