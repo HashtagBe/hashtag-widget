@@ -59,7 +59,7 @@ canvas.hashtag-level-bar {
     text-align: center;
 }
 
-.hashtag-label-name {
+.hashtag-label > div:first-child {
     font-weight: bold;
 }
 
