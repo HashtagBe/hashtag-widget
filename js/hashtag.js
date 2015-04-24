@@ -12,6 +12,15 @@ HashtagItem = (function() {
      */
     function HashtagItem(data) {
         this.data = data;
+        this.label = true;
+    }
+
+    HashtagItem.prototype.options = function(options) {
+        if (options != undefined) {
+            if (options.label != undefined)
+                this.label = options.label;
+        }
+        return this;
     }
 
     /**
@@ -26,7 +35,12 @@ HashtagItem = (function() {
      * @return {string} - The rendered item.
      */
     HashtagItem.prototype.html = function() {
-        return template.render({ data: this.data });
+        return template.render({
+            data: this.data,
+            options: {
+                label: this.label
+            }
+        });
     };
 
     /**
@@ -144,6 +158,11 @@ HashtagList = (function() {
         this.data = data;
     }
 
+    HashtagList.prototype.options = function(options) {
+        this.options = options;
+        return this;
+    }
+
     /**
      * The EJS template
      * @private
@@ -156,7 +175,7 @@ HashtagList = (function() {
      * @return {string} - The rendered list.
      */
     HashtagList.prototype.html = function() {
-        return template.render({ data: this.data });
+        return template.render({ data: this.data, options: this.options });
     };
 
     /**
@@ -184,8 +203,10 @@ HashtagList = (function() {
     /**
      * Generates a hashtag item.
      */
-    $.fn.hashtagItem = function(data) {
-        return new HashtagItem(data).render(this);
+    $.fn.hashtagItem = function(data, options) {
+        return new HashtagItem(data)
+        .options(options)
+        .render(this);
     }
 
     /**
@@ -199,8 +220,10 @@ HashtagList = (function() {
     /**
      * Generates a hashtag list.
      */
-    $.fn.hashtagList = function(data) {
-        return new HashtagList(data).render(this);
+    $.fn.hashtagList = function(data, options) {
+        return new HashtagList(data)
+        .options(options)
+        .render(this);
     };
 
 })(jQuery);

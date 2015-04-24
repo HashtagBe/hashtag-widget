@@ -7,8 +7,10 @@
       </div>
     </div>
   </div>
-  <div class="hashtag-label">
-    <div>#<%= data.name %></div>
-    <div><%= data.energy %></div>
-  </div>
+  <% if (options.label) { %>
+    <div class="hashtag-label">
+      <div>#<%= data.name %></div>
+      <div><%= data.energy %></div>
+    </div>
+  <% } %>
 </div>

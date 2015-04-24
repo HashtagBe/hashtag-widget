@@ -19,7 +19,7 @@ $(document).ready(function () {
         $('#list').hashtagList(be.tags);
     }).click();
     $('#addItem').click(function() {
-        $('#single').hashtagItem(randomTag()).drawRadial();
+        $('#single').hashtagItem(randomTag(), { label: false }).drawRadial();
     }).click();
     $('#addListItem').click(function() {
         var item = new HashtagItem(randomTag()).html();

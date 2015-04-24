@@ -1,5 +1,5 @@
 <ul class="hashtag-list">
   <% data.forEach(function(item) { %>
-    <li><%= new HashtagItem(item).html() %></li>
+    <li><%= new HashtagItem(item).options(options).html() %></li>
   <% }); %>
 </ul>
