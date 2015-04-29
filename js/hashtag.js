@@ -15,6 +15,13 @@ HashtagItem = (function() {
         this.label = 'truncate';
     }
 
+    /**
+     * Set options.
+     * @param {object} options - The options object.
+     *   Currently the following options are supported:
+     *   - {boolean|string} label Whether to show name and energy amount.
+     *                            If set to 'truncate' truncates long strings.
+     */
     HashtagItem.prototype.options = function(options) {
         if (options != undefined) {
             if (options.label != undefined)
@@ -158,6 +165,11 @@ HashtagList = (function() {
         this.data = data;
     }
 
+    /**
+     * Set options.
+     * @param {object} options - The options object
+     * @see HashtagItem#options
+     */
     HashtagList.prototype.options = function(options) {
         this.options = options;
         return this;
