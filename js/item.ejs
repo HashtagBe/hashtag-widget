@@ -1,0 +1,14 @@
+<div class="hashtag" data-id="<%= obj.id %>" data-related-ids="<%= obj.related_ids %>">
+  <div class="hashtag-circle">
+    <canvas class="hashtag-level-bar" data-level="<%= obj.level / 10 %>"/>
+    <div class="hashtag-icon" style="background-image: url(<%= obj.icon %>)">
+      <div class="hashtag-level">
+        <span><%= obj.level %></span>
+      </div>
+    </div>
+  </div>
+  <div class="hashtag-label">
+    <div class="hashtag-label-name">#<%= obj.name %></div>
+    <div class="hashtag-label-energy"><%= obj.energy %></div>
+  </div>
+</div>
