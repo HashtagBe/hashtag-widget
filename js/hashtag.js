@@ -12,16 +12,13 @@ HashtagItem = (function() {
      */
     function HashtagItem(data) {
         this.data = data;
-        this.label = true;
-        this.truncate = true;
+        this.label = 'truncate';
     }
 
     HashtagItem.prototype.options = function(options) {
         if (options != undefined) {
             if (options.label != undefined)
                 this.label = options.label;
-            if (options.truncate != undefined)
-                this.truncate = options.truncate;
         }
         return this;
     }
@@ -42,7 +39,6 @@ HashtagItem = (function() {
             data: this.data,
             options: {
                 label: this.label,
-                truncate: this.truncate
             }
         });
     };
