@@ -1,0 +1,30 @@
+{
+  "name": "hashtag-widget",
+  "version": "0.1.0",
+  "authors": [
+    "Paolo D'Apice <paolo@hashtag.be>"
+  ],
+  "description": "Widget displaying a rounded energy icon with a radial bar.",
+  "main": [
+    "js/hashtag.js",
+    "css/hashtag.css"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HashtagBe/hashtag-widget.git"
+  },
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "assets",
+    "css",
+    "js",
+    "Gemfile*",
+    "Rakefile"
+  ],
+  "dependencies": {
+    "embeddedjavascript": "git://github.com/dapicester/embeddedjavascript.git",
+    "jquery": "~2.1.4"
+  }
+}
