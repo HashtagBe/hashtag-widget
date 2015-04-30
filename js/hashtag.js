@@ -23,17 +23,18 @@ HashtagItem = (function() {
      *                            If set to 'truncate' truncates long strings.
      */
     HashtagItem.prototype.options = function(options) {
-        if (options != undefined) {
-            if (options.label != undefined)
+        if (options) {
+            if (options.label !== undefined)
                 this.label = options.label;
         }
         return this;
-    }
+    };
 
     /**
      * The JavaScript template.
      * @private
      */
+    // jshint multistr: true
     var template = _.template('\
 <div class="hashtag-item" data-id="<%= data.item.id %>" data-related-ids="<%= data.item.related_ids %>">\
   <div class="hashtag-circle">\
@@ -96,7 +97,7 @@ HashtagItem = (function() {
      * @private
      */
     var draw = function(canvas, originalValue, width, originalSize, value) {
-        if (value == undefined) {
+        if (value === undefined) {
             value = 0.1;
         }
 
@@ -189,12 +190,13 @@ HashtagList = (function() {
     HashtagList.prototype.options = function(options) {
         this.options = options;
         return this;
-    }
+    };
 
     /**
      * The JavaScript template.
      * @private
      */
+    // jshint multistr: true
     var template = _.template('\
 <ul class="hashtag-list">\
   <% data.list.forEach(function(item) { %>\
@@ -218,10 +220,10 @@ HashtagList = (function() {
      */
     HashtagList.prototype.render = function(element) {
         return $(this.html())
-        .appendTo(element)
-        .find('.hashtag-item').each(function() {
-            HashtagItem.drawRadial(this)
-        });
+          .appendTo(element)
+          .find('.hashtag-item').each(function() {
+              HashtagItem.drawRadial(this);
+          });
     };
 
     return HashtagList;
@@ -240,7 +242,7 @@ HashtagList = (function() {
         return new HashtagItem(data)
         .options(options)
         .render(this);
-    }
+    };
 
     /**
      * Draw the radial energy bar.
