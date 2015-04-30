@@ -31,10 +31,26 @@ HashtagItem = (function() {
     }
 
     /**
-     * The EJS template
+     * The JavaScript template.
      * @private
      */
-    var template = new EJS({ url: 'js/item.ejs' });
+    var template = _.template('\
+<div class="hashtag-item" data-id="<%= data.item.id %>" data-related-ids="<%= data.item.related_ids %>">\
+  <div class="hashtag-circle">\
+    <canvas class="hashtag-level-bar" data-level="<%= data.item.level / 10 %>"/>\
+    <div class="hashtag-icon" style="background-image: url(<%= data.item.icon %>)">\
+      <div class="hashtag-level">\
+        <span><%= data.item.level %></span>\
+      </div>\
+    </div>\
+  </div>\
+  <% if (data.options.label) { %>\
+    <div class="hashtag-label <%= data.options.label == "truncate" && "truncate" || "" %>">\
+      <div>#<%= data.item.name %></div>\
+      <div><%= data.item.energy %></div>\
+    </div>\
+  <% } %>\
+</div>', { variable: 'data' });
 
     /**
      * Renders the item as HTML.
@@ -42,8 +58,8 @@ HashtagItem = (function() {
      * @return {string} - The rendered item.
      */
     HashtagItem.prototype.html = function() {
-        return template.render({
-            data: this.data,
+        return template({
+            item: this.data,
             options: {
                 label: this.label,
             }
@@ -176,10 +192,15 @@ HashtagList = (function() {
     }
 
     /**
-     * The EJS template
+     * The JavaScript template.
      * @private
      */
-    var template = new EJS({ url: 'js/list.ejs' });
+    var template = _.template('\
+<ul class="hashtag-list">\
+  <% data.list.forEach(function(item) { %>\
+    <li><%= new HashtagItem(item).options(data.options).html() %></li>\
+  <% }); %>\
+</ul>', { variable: 'data' });
 
     /**
      * Renders the list as HTML.
@@ -187,7 +208,7 @@ HashtagList = (function() {
      * @return {string} - The rendered list.
      */
     HashtagList.prototype.html = function() {
-        return template.render({ data: this.data, options: this.options });
+        return template({ list: this.data, options: this.options });
     };
 
     /**
