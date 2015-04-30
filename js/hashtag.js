@@ -39,7 +39,11 @@ HashtagItem = (function() {
 <div class="hashtag-item" data-id="<%= data.item.id %>" data-related-ids="<%= data.item.related_ids %>">\
   <div class="hashtag-circle">\
     <canvas class="hashtag-level-bar" data-level="<%= data.item.level / 10 %>"/>\
+    <% if (data.item.icon) { %>\
     <div class="hashtag-icon" style="background-image: url(<%= data.item.icon %>)">\
+    <% } else { %>\
+    <div class="hashtag-icon hashtag-<%= data.item.primary ? "brand" : "interest" %>">\
+    <% } %>\
       <div class="hashtag-level">\
         <span><%= data.item.level %></span>\
       </div>\
