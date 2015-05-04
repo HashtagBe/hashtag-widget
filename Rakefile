@@ -1,20 +1,32 @@
 require 'yui/compressor'
 
+# Define the name of the output files.
 module_name = 'hashtag'
+
+# Where to put the output files.
 output_dir  = 'dist'
 
+# List the files. Can use FileList and globs.
+js_files  = %w(hashtag.js)
+css_files = %w(hashtag.css)
+
+# Tasks
+
+# Create output directory.
 directory output_dir
 
 %w(js css).each do |ext|
-  files = FileList["#{ext}/*.#{ext}"]
-  single = File.join output_dir, "#{module_name}.#{ext}"
+  # Input files.
+  files = eval("#{ext}_files").map { |f| File.join ext, f }
 
-  file single => [output_dir, files] do
+  # Concatenate all files.
+  single = File.join output_dir, "#{module_name}.#{ext}"
+  file single => [output_dir, *files] do
     sh "cat #{files.join ' '} > #{single}"
   end
 
+  # Minify with yui.
   compressed = File.join output_dir, "#{module_name}.min.#{ext}"
-
   file compressed => single do
     puts "yui-compressor #{single} -o #{compressed}"
     compressor = case ext
@@ -28,11 +40,13 @@ directory output_dir
     end
   end
 
+  desc "Concatenates and minifies .#{ext} files"
   task ext => compressed
 end
 
 task :default => %i(js css)
 
+desc "Removes the #{output_dir} directory"
 task :clean do
   rm_rf output_dir
 end
