@@ -5,3 +5,8 @@ watched.each do |ext|
     watch %r{^#{ext}/.+\.#{ext}$}
   end
 end
+
+guard :livereload, port: 34567 do
+  watch %r{^dist/.+\.(css|js)$}
+  watch %r{^index\.html$}
+end

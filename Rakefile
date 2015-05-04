@@ -51,7 +51,7 @@ task :clean do
   rm_rf output_dir
 end
 
-desc 'Starts Guard'
+desc 'Starts Guard with livereload'
 task :guard do
   sh 'bundle exec guard'
 end
