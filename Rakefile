@@ -50,3 +50,8 @@ desc "Removes the #{output_dir} directory"
 task :clean do
   rm_rf output_dir
 end
+
+desc 'Starts Guard'
+task :guard do
+  sh 'bundle exec guard'
+end
