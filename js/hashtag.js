@@ -42,7 +42,7 @@ HashtagItem = (function() {
     <% if (data.item.icon) { %>\
     <div class="hashtag-icon" style="background-image: url(<%= data.item.icon %>)">\
     <% } else { %>\
-    <div class="hashtag-icon hashtag-<%= data.item.primary ? "brand" : "interest" %>">\
+    <div class="hashtag-icon hashtag-<%= data.type %>" style="<%= data.color %>">\
     <% } %>\
       <div class="hashtag-level">\
         <span><%= data.item.level %></span>\
@@ -58,6 +58,49 @@ HashtagItem = (function() {
 </div>', { variable: 'data' });
 
     /**
+     * Colors for hashtag icons.
+     * @private
+     */
+    var colors = [
+        '#c51158',
+        '#c90200',
+        '#e80038',
+        '#ea3f2b',
+        '#fb3d40',
+        '#ff4923',
+        '#ea552b',
+        '#ff8122',
+        '#ffa400',
+        '#440c5c',
+        '#1d1a72',
+        '#02375e',
+        '#105299',
+        '#005866',
+        '#00726f',
+        '#05687f',
+        '#0e7d9b',
+        '#0f5001',
+        '#006b00',
+        '#138c02',
+        '#578e00',
+        '#13aa02',
+        '#87c400',
+        '#79aa00',
+        '#97af01',
+        '#727272',
+    ];
+
+    /**
+     * Get a random background color chosen among the predefined ones.
+     * @private
+     * @return {string} - CSS background-color string.
+     */
+    var randomColor = function() {
+        var i = Math.floor(Math.random() * colors.length);
+        return "background-color:" + colors[i];
+    };
+
+    /**
      * Renders the item as HTML.
      * Need to explicitly call HashtagItem.drawRadial().
      * @return {string} - The rendered item.
@@ -65,6 +108,8 @@ HashtagItem = (function() {
     HashtagItem.prototype.html = function() {
         return template({
             item: this.data,
+            color: randomColor(),
+            type: this.data.primary ? "brand" : "interest",
             options: {
                 label: this.label,
             }
