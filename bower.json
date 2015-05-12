@@ -18,8 +18,6 @@
   "ignore": [
     "**/.*",
     "assets",
-    "css",
-    "js",
     "Gemfile*",
     "Rakefile"
   ],
