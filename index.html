@@ -26,22 +26,50 @@ $(document).ready(function () {
         var item = new HashtagItem(randomTag()).html();
         $('<li>'+item+'</li>').appendTo("#list .hashtag-list").drawRadial();
     });
+    for(var i=1; i<=10; i++) {
+        var tag = be.tags[i % 2];
+        tag.level = i;
+        var item = new HashtagItem(tag).options({ label: false}).html();
+        $('<li>'+item+'</li>').appendTo("#levels ul").drawRadial();
+    }
+    $('#redraw').click(function() {
+        $('#levels .hashtag-item').each(function(i) { $(this).drawRadial(); });
+    });
 });
 </script>
+<style>
+body {
+    background: lightgray;
+}
+table {
+    width: 100%;
+}
+#levels .hashtag-item {
+    background: black;
+}
+#levels .hashtag-icon {
+    display: none;
+}
+</style>
 </head>
-<body style="background: lightgray">
+<body>
     <h1>Hashtag widget test page</h1>
-    <button id="addList">Add list</button>
-    <button id="addListItem">Add list item</button>
-    <button id="addItem">Add item</button>
     <table>
         <tr>
-            <td>HashtagList</td>
+            <td>
+                HashtagList<br/>
+                <button id="addList">Add list</button><br/>
+                <button id="addListItem">Add list item</button>
+            </td>
             <td><div id="list"></div></td>
         </tr>
         <tr>
-            <td>HashtagItem</td>
+            <td>HashtagItem<br/><button id="addItem">Add item</button></td>
             <td><div id="single"></div></td>
+        </tr>
+        <tr>
+            <td>Levels<br/><button id="redraw">Redraw</button></td>
+            <td><div id="levels"><ul class='hashtag-list'></ul></div></td>
         </tr>
     </table>
 </body>
