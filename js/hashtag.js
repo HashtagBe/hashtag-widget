@@ -137,7 +137,7 @@ HashtagItem = (function() {
      */
     HashtagItem.prototype.render = function(element) {
         var item = $(this.html()).appendTo(element);
-        HashtagItem.drawRadial(item);
+        //HashtagItem.drawRadial(item);
         return item;
     };
 
